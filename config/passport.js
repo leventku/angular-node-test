@@ -3,6 +3,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
 var User            = require('../app/models/user').model;
+var Attempt            = require('../app/models/attempt').model;
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -39,8 +40,17 @@ module.exports = function(passport) {
         // find a user whose username is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'username' :  username }, function(err, user) {
-            // if there are any errors, return the error before anything else
+            // write to DB when a login attempt
+            var attempt = new Attempt({
+              ip: req.ip,
+              action: user && user.validPassword(password) ? 'AUTH_SUCCESS' : 'AUTH_FAILURE',
+              username: req.body.username
+            });
+            attempt.save(function(err, attempt) {
+              if (err) {return console.error(err)};
+            });
 
+            // if there are any errors, return the error before anything else
             if (err)
                 return done(err);
 

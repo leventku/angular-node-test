@@ -1,5 +1,12 @@
 <div class="jumbotron text-center">
     <h1>Welcome {{ProfileController.user}}!</h1>
 
-    
+    <div ng-if="ProfileController.attempts.length">
+      <h3>Login Attempts</h3>
+      <ul>
+        <li ng-repeat="attempt in ProfileController.attempts">
+          IP: {{attempt.ip}} - TIME: {{attempt.datetime}} - ACTION: {{attempt.action}} - USER: {{attempt.username}}
+        </li>
+      </ul>
+    </div>
 </div>
