@@ -33,6 +33,15 @@ module.exports = function(app, passport) {
     })
   })
 
+  // process the login check
+  app.get('/api/checkAuth', function (req, res) {
+    res.send({
+      user: req.user ? req.user.username : null,
+      isAuthenticated: req.isAuthenticated()
+    });
+  });
+
+
   // frontend routes =========================================================
   // route to handle all angular requests
   app.get('*', function (req, res) {

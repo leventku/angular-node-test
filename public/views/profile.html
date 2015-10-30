@@ -5,7 +5,7 @@
       <h3>Login Attempts</h3>
       <ul>
         <li ng-repeat="attempt in ProfileController.attempts">
-          IP: {{attempt.ip}} - TIME: {{attempt.datetime}} - ACTION: {{attempt.action}} - USER: {{attempt.username}}
+          <strong>IP:</strong> {{attempt.ip}} - <strong>TIME:</strong> {{attempt.datetime}} - <strong>ACTION:</strong> {{attempt.action}} - <strong>USER:</strong> {{attempt.username}}
         </li>
       </ul>
     </div>
