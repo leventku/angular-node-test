@@ -8,5 +8,13 @@ angular.module('main', []).controller('MainController', function (authService, $
         $location.path('/profile')
       }
     });
+  };
+
+  this.logout = function () {
+    authService.logout();
+  }
+
+  this.isLoggedIn = function () {
+    return !!authService.currentUser;
   }
 });

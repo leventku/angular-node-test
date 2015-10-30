@@ -13,6 +13,14 @@ angular.module('main').factory('authService', function ($http) {
         return resp.data
       });
     },
-    currentUser: ''
+    currentUser: '',
+    logout: function () {
+      return $http({
+        method: 'GET',
+        url: '/api/logout'
+      }).then(function () {
+        this.currentUser = '';
+      }.bind(this));
+    }
   }
 })
