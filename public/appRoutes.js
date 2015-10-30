@@ -7,6 +7,12 @@ angular.module('main')
         controllerAs: 'MainController'
       })
 
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileController',
+        controllerAs: 'ProfileController'
+      })
+
       .otherwise({
         redirectTo: '/'
       });
