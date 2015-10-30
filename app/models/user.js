@@ -5,6 +5,11 @@ var userSchema = mongoose.Schema({
   password: String
 });
 
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return password === this.password;
+};
+
 var userModel = mongoose.model('User', userSchema);
 
 function seedUsers () {

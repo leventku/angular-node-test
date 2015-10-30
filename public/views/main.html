@@ -3,11 +3,11 @@
 
     <form>
       <label> Username:
-        <input type="text" name="username">
+        <input type="text" name="username" ng-model="MainController.username" required>
       </label>
       <label> Password:
-        <input type="password" name="password">
+        <input type="password" name="password" ng-model="MainController.password" required>
       </label>
-      <input type="submit" value="Login">
+      <input type="submit" value="Login" ng-click="MainController.login()">
     </form>
 </div>
