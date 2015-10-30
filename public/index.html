@@ -1,14 +1,42 @@
+<!-- public/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <base href="/">
 
-    <title>Starter MEAN Single Page Application</title>
+    <title>Angular Node Test</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+
+    <!-- JS -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="js/controllers/MainCtrl.js"></script>
+    <script src="appRoutes.js"></script>
+    <script src="app.js"></script>
 </head>
-<body>
+<body ng-app="sampleApp" ng-controller="MainController">
+<div class="container">
 
-    we did it!
+    <!-- HEADER -->
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Angular Node Test</a>
+        </div>
 
+        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+        <ul class="nav navbar-nav">
+            <li><a href="#">Log out</a></li>
+        </ul>
+    </nav>
+
+    <!-- ANGULAR DYNAMIC CONTENT -->
+    <div ng-view></div>
+
+</div>
 </body>
 </html>
