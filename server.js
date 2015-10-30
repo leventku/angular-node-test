@@ -25,7 +25,7 @@ var port = process.env.PORT || 8080;
 // (uncomment after you enter in your own credentials in config/db.js)
 mongoose.connect(db.url); 
 
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
