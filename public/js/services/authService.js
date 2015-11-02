@@ -1,4 +1,4 @@
-angular.module('main').factory('authService', function ($http) {
+angular.module('main').factory('authService', function ($http, $q, $location) {
   return {
     login: function (data) {
       return $http({
@@ -20,6 +20,24 @@ angular.module('main').factory('authService', function ($http) {
         url: '/api/logout'
       }).then(function () {
         this.currentUser = '';
+      }.bind(this));
+    },
+    isLoggedIn: function () {
+      return $http({
+        method:'GET',
+        url: '/api/checkAuth'
+      }).then(function(resp) {
+        var deferred = $q.defer();
+
+        this.currentUser = resp.data.user;
+        if (resp.data.isAuthenticated) {
+          deferred.resolve();
+        }
+        else {
+          deferred.reject();
+          $location.url('/');
+        }
+        return deferred.promise;
       }.bind(this));
     }
   }

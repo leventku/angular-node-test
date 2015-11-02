@@ -1,5 +1,6 @@
 angular.module('main')
   .config(function ($routeProvider, $locationProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -10,7 +11,12 @@ angular.module('main')
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileController',
-        controllerAs: 'ProfileController'
+        controllerAs: 'ProfileController',
+        resolve: {
+          isLoggedIn: function (authService) {
+            return authService.isLoggedIn();
+          }
+        }
       })
 
       .otherwise({

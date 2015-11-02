@@ -18,12 +18,12 @@ module.exports = function(app, passport) {
     res.send();
   })
 
-  app.get('/api/attempts', function (req, res) {
+  app.get('/api/attempts', isLoggedIn, function (req, res) {
     Attempt.model.find(function(err, attempts) {
       if (err) {
         res.send(err);
       }
-      if (req.user.username === 'admin') {
+      if (req.user && req.user.username === 'admin') {
         res.json(attempts);
         return;
       }
@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
   // process the login check
   app.get('/api/checkAuth', function (req, res) {
     res.send({
-      user: req.user ? req.user.username : null,
+      user: req.user ? req.user.username : '',
       isAuthenticated: req.isAuthenticated()
     });
   });
@@ -47,4 +47,14 @@ module.exports = function(app, passport) {
   app.get('*', function (req, res) {
     res.sendfile('./public/index.html');
   })
+}
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.send(401);
+  }
+  else {
+    next()
+  };
 }

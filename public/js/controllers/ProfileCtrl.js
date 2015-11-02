@@ -3,7 +3,10 @@ angular.module('main').controller('ProfileController', function (authService, at
 
   this.attempts = [];
 
-  attemptService.get().then(function(data) {
-    this.attempts = data;
-  }.bind(this));
+  if (this.user === 'admin') {
+    attemptService.get().then(function(data) {
+      this.attempts = data;
+    }.bind(this));
+  }
+
 });
